@@ -605,6 +605,16 @@
           </q-card>
         </q-dialog>
       </div> -->
+      <q-dialog v-model="showImageDialog">
+        <q-card flat style="width: 80vw; max-width: 80vw">
+          <q-card-section class="text-center">
+            <img
+              :src="displayImageUrl"
+              style="max-height: 80vh; max-width: 80vh"
+            />
+          </q-card-section>
+        </q-card>
+      </q-dialog>
       <div v-show="selectedItems.length > 0">
         <a
           href="#quickpurchase"
