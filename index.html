@@ -231,7 +231,7 @@
                 <div class="sub-heading-divider"></div>
               </div>
               <div class="products-body-container">
-                <div v-show="productsLoading" class="loader-section">
+                <div v-if="productsLoading" class="loader-section">
                   <div
                     data-w-id="26370789-6121-a350-dd84-6814622b9e4b"
                     data-animation-type="lottie"
@@ -285,18 +285,18 @@
                               <!-- Image not working -->
                               <!-- Images to be uploaded to some image hosting site and the URL to be updated to the sheets.  -->
                               <!-- After this process, uncomment the below line, and remove the next line -->
-                              <!-- <img
+                              <img
                                 :src="item.imageUrl"
                                 loading="lazy"
                                 alt=""
                                 class="product-pic"
-                              /> -->
-                              <img
+                              />
+                              <!-- <img
                                 :src="null"
                                 loading="lazy"
                                 alt=""
                                 class="product-pic"
-                              />
+                              /> -->
                             </div>
                             <div class="product-contents">
                               <div class="product-name">{{ item.name }}</div>
@@ -315,6 +315,7 @@
                               @click="addItemId(item.id)"
                               v-if="item.availability === 'Available' && item.quantity === 0"
                               class="add-button"
+                              type="button"
                             >
                               <div class="add-button-text">ADD</div>
                             </div>
