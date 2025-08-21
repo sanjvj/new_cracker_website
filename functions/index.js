@@ -18,7 +18,7 @@ admin.initializeApp()
 
 const EMAIL_ADDRESS = functions.config().credentials.email
 const PASSWORD = functions.config().credentials.password
-const SHEET_ID = '1yKrWB7x5TaIxN4b0pOpwZSOo_IYg8IuWYilGWgL3Dic'
+const SHEET_ID = (functions.config().sheets && functions.config().sheets.id) ? functions.config().sheets.id : 'REPLACE_WITH_SHEET_ID'
 const COUPONS_RANGE = 'Coupons!A2:B'
 
 
@@ -34,7 +34,7 @@ var transporter = nodemailer.createTransport({
 
 exports.sendMailOverHTTP = functions.https.onCall((data, context) => {
     return new Promise((resolve, reject) => {
-        console.log("Sending mail details: ", EMAIL_ADDRESS, PASSWORD);
+        console.log("Sending mail via:", EMAIL_ADDRESS);
 
         const mailOptions = {
             from: data.fromEmail,
@@ -50,7 +50,7 @@ exports.sendMailOverHTTP = functions.https.onCall((data, context) => {
                 reject(null);
 
             }
-            console.log("Sent mail: ");
+            console.log("Sent mail successfully");
 
             var data = JSON.stringify(data)
             resolve(data);
@@ -88,7 +88,7 @@ exports.addDataToSheetsApi = functions.https.onCall((data, context) => {
         }).then(async (auth) => {
             const api = google.sheets({ version: 'v4', auth });
             let response = await api.spreadsheets.values.update({
-                spreadsheetId: SHEET_ID,
+                spreadsheetId: data.sheetId || SHEET_ID,
                 range: data.range,
                 resource: data.body,
                 valueInputOption: data.valueInputOption,
@@ -114,7 +114,7 @@ exports.appendDataToSheetsApi = functions.https.onCall((data, context) => {
         }).then(async (auth) => {
             const api = google.sheets({ version: 'v4', auth });
             let response = await api.spreadsheets.values.append({
-                spreadsheetId: data.sheetId,
+                spreadsheetId: data.sheetId || SHEET_ID,
                 range: data.range,
                 resource: data.body,
                 valueInputOption: data.valueInputOption,

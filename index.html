@@ -7,27 +7,12 @@
 >
   <head>
     <meta charset="utf-8" />
-    <title>AJ Crackers - Best Crackers in Sivakasi</title>
-    <meta
-      content="AJ Crackers are well known for their quality of fireworks, crackers and fancy novelties at reasonable prices. We are a reputed wholesaler of fireworks and crackers in Sivakasi, Tamilnadu. Since the day of our initiation, we have anticipated largely in making millions of lives happier and lightened up."
-      name="description"
-    />
-    <meta
-      content="AJ Crackers - Best Crackers in Sivakasi"
-      property="og:title"
-    />
-    <meta
-      content="AJ Crackers are well known for their quality of fireworks, crackers and fancy novelties at reasonable prices. We are a reputed wholesaler of fireworks and crackers in Sivakasi, Tamilnadu. Since the day of our initiation, we have anticipated largely in making millions of lives happier and lightened up."
-      property="og:description"
-    />
-    <meta
-      content="AJ Crackers - Best Crackers in Sivakasi"
-      property="twitter:title"
-    />
-    <meta
-      content="AJ Crackers are well known for their quality of fireworks, crackers and fancy novelties at reasonable prices. We are a reputed wholesaler of fireworks and crackers in Sivakasi, Tamilnadu. Since the day of our initiation, we have anticipated largely in making millions of lives happier and lightened up."
-      property="twitter:description"
-    />
+    <title id="app-title">Store - Best Crackers in Sivakasi</title>
+    <meta content="" name="description" id="meta-description" />
+    <meta content="" property="og:title" id="og-title" />
+    <meta content="" property="og:description" id="og-description" />
+    <meta content="" property="twitter:title" id="twitter-title" />
+    <meta content="" property="twitter:description" id="twitter-description" />
     <meta property="og:type" content="website" />
     <meta content="summary_large_image" name="twitter:card" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -177,7 +162,7 @@
             class="social-wrapper"
           >
             <a
-              href="mailto:ajaysankar9920@gmail.com?subject=Customer%20Enquiry%20-%20AJ%20Crackers"
+              id="mailto-link"
               class="social-icon w-inline-block"
               ><img
                 src="images/email.svg"
@@ -186,7 +171,7 @@
                 class="social-pic"
             /></a>
             <a
-              href="https://wa.me/918248160539?text=Hi+I+need+to+make+an+enquiry+for+AJ+Crackers"
+              id="whatsapp-link"
               target="_blank"
               class="social-icon w-inline-block"
               ><img
@@ -205,7 +190,7 @@
                 alt=""
                 class="social-pic"
             /></a>
-            <a href="tel:+918248160539" class="social-icon w-inline-block"
+            <a id="tel-link" class="social-icon w-inline-block"
               ><img
                 src="images/telephone-symbol-button-1.svg"
                 loading="lazy"
@@ -575,7 +560,7 @@
       </div>
       <div class="footer-section wf-section">
         <div class="footer-wrapper">
-          <div class="footer-text">AJ Crackers © 2022</div>
+          <div class="footer-text" id="footer-brand">Store © 2022</div>
         </div>
       </div>
       <!-- <div
@@ -665,9 +650,51 @@
     <script src="https://cdn.jsdelivr.net/npm/quasar@1.15.21/dist/quasar.umd.modern.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-functions.js"></script>
+    <script src="js/config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/quick-purchase.js"></script>
+    <script>
+      (function(){
+        var cfg = window.APP_CONFIG || {};
+        var company = cfg.COMPANY_NAME || 'Our Store';
+        var mailto = cfg.MAILTO_EMAIL || '';
+        var fromName = cfg.MAIL_FROM_NAME || company;
+        var whatsapp = cfg.WHATSAPP_NUMBER || '';
+        var phone = cfg.PHONE_NUMBER || whatsapp;
+        var titleEl = document.getElementById('app-title');
+        if (titleEl) {
+          titleEl.innerText = company + ' - Best Crackers in Sivakasi';
+        }
+        var ogTitle = document.getElementById('og-title');
+        if (ogTitle) { ogTitle.setAttribute('content', company + ' - Best Crackers in Sivakasi'); }
+        var twTitle = document.getElementById('twitter-title');
+        if (twTitle) { twTitle.setAttribute('content', company + ' - Best Crackers in Sivakasi'); }
+        var desc = company + ' are well known for their quality of fireworks, crackers and fancy novelties at reasonable prices.';
+        var metaDesc = document.getElementById('meta-description');
+        if (metaDesc) { metaDesc.setAttribute('content', desc); }
+        var ogDesc = document.getElementById('og-description');
+        if (ogDesc) { ogDesc.setAttribute('content', desc); }
+        var twDesc = document.getElementById('twitter-description');
+        if (twDesc) { twDesc.setAttribute('content', desc); }
+        var mailtoEl = document.getElementById('mailto-link');
+        if (mailtoEl && mailto) {
+          mailtoEl.href = 'mailto:' + mailto + '?subject=Customer%20Enquiry%20-%20' + encodeURIComponent(company);
+        }
+        var whatsappEl = document.getElementById('whatsapp-link');
+        if (whatsappEl && whatsapp) {
+          whatsappEl.href = 'https://wa.me/' + whatsapp + '?text=' + encodeURIComponent('Hi I need to make an enquiry for ' + company);
+        }
+        var telEl = document.getElementById('tel-link');
+        if (telEl && phone) {
+          telEl.href = 'tel:+' + phone;
+        }
+        var footerEl = document.getElementById('footer-brand');
+        if (footerEl) {
+          footerEl.innerText = company + ' © 2022';
+        }
+      })();
+    </script>
     <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   </body>
 </html>

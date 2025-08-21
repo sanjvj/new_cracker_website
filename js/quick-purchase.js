@@ -14,7 +14,7 @@ new Vue({
       showImageDialog: false,
       isTermsAccepted: false,
       defaultDiscount: "50",
-      vendorEmail: "cloudcerebro.dev.09.2020@gmail.com",
+      vendorEmail: (window.APP_CONFIG && window.APP_CONFIG.MAILTO_EMAIL) ? window.APP_CONFIG.MAILTO_EMAIL : "",
       minimumOrderAmount: 3000,
       items: [],
       categories: [],
@@ -376,7 +376,7 @@ new Vue({
                                         <td align="center" valign="top">
                                            <div style="height: 40px; line-height: 40px; font-size: 38px;">&nbsp;</div>
                                            
-                                              <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-size:32px; color:#ff0000; text-decoration-line: none;font-weight: 700;">AJ Crackers</span>
+                                              <span style="font-family: 'Source Sans Pro', Arial, Tahoma, Geneva, sans-serif;font-size:32px; color:#ff0000; text-decoration-line: none;font-weight: 700;">${(window.APP_CONFIG && window.APP_CONFIG.COMPANY_NAME) ? window.APP_CONFIG.COMPANY_NAME : 'Our Store'}</span>
                                            <div class="top_pad2" style="height: 50px; line-height: 50px; font-size: 50px;">&nbsp;</div>
                                         </td>
                                      </tr>
@@ -512,7 +512,7 @@ new Vue({
                                 <td align="center" valign="top"> <div style="height: 34px;">&nbsp;</div>
                                   
                                         <div style="height: 15px;">&nbsp;</div>
-                                        <font face="'Source Sans Pro', sans-serif" color="#ffffff" style="font-size: 14px;line-height: 22px; "> Thank you for ordering from AJ Crackers!<br> Wishing you a Happy Diwali! </font>
+                                        <font face="'Source Sans Pro', sans-serif" color="#ffffff" style="font-size: 14px;line-height: 22px; "> Thank you for ordering from ${(window.APP_CONFIG && window.APP_CONFIG.COMPANY_NAME) ? window.APP_CONFIG.COMPANY_NAME : 'Our Store'}!<br> Wishing you a Happy Diwali! </font>
                                        
                                       
                                         <div style="height: 34px;">&nbsp;</div>
@@ -869,7 +869,7 @@ new Vue({
 
         var vendorSubject = `Enquiry from ${this.orderDetails.email}`;
         let vendorEmail = this.vendorEmail;
-        let fromEmail = `Cloud Cerebro <cloudcerebro.dev.09.2020@gmail.com>`;
+        let fromEmail = `${(window.APP_CONFIG && window.APP_CONFIG.MAIL_FROM_NAME) ? window.APP_CONFIG.MAIL_FROM_NAME : 'Store'} <${(window.APP_CONFIG && window.APP_CONFIG.MAIL_FROM_EMAIL) ? window.APP_CONFIG.MAIL_FROM_EMAIL : ''}>`;
 
         let vendorMail = {
           fromEmail: fromEmail,
@@ -878,7 +878,7 @@ new Vue({
           body: mailBody,
         };
 
-        var userSubject = `Enquiry placed in AJ Crackers`;
+        var userSubject = `Enquiry placed in ${(window.APP_CONFIG && window.APP_CONFIG.COMPANY_NAME) ? window.APP_CONFIG.COMPANY_NAME : 'Our Store'}`;
         let userEmail = this.orderDetails.email;
 
         let userMail = {
