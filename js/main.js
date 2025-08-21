@@ -4,7 +4,7 @@ var addDataToSheetsApi = null;
 
 
 
-const SHEET_ID = '1yKrWB7x5TaIxN4b0pOpwZSOo_IYg8IuWYilGWgL3Dic'
+const SHEET_ID = window.APP_CONFIG && window.APP_CONFIG.SHEET_ID ? window.APP_CONFIG.SHEET_ID : 'REPLACE_WITH_SHEET_ID'
 
 const CRACKERS_RANGE = 'Cracker List!A2:G'
 const CATEGORIES_RANGE = 'Categories!A2:A'
@@ -15,8 +15,8 @@ const ORDERS_RANGE = 'Orders!A2:Q'
 const VENDOR_EMAIL_RANGE = 'WebsiteData!C2'
 const MINIMUM_ORDER_RANGE = 'WebsiteData!E2'
 
-const VENDOR_EMAIL = `siva2k007@gmail.com`
-const MINIMUM_ORDER_AMOUNT = 3000
+const VENDOR_EMAIL = window.APP_CONFIG && window.APP_CONFIG.MAILTO_EMAIL ? window.APP_CONFIG.MAILTO_EMAIL : ''
+const MINIMUM_ORDER_AMOUNT = window.APP_CONFIG && window.APP_CONFIG.MINIMUM_ORDER_AMOUNT ? window.APP_CONFIG.MINIMUM_ORDER_AMOUNT : 3000
 
 function reInitWebflow() {
     //RE-INIT WF as Vue.js init breaks WF interactions
@@ -43,17 +43,7 @@ function reInitWebflow() {
 function initFirebase() {
     console.log("Init firebase:",);
 
-    var firebaseConfig = {
-        /* cSpell:disable */
-
-        apiKey: "AIzaSyAeeilC4PxPYDHmHV4RRb4_xHRab7ttmYo",
-        authDomain: "aj-crackers.firebaseapp.com",
-        projectId: "aj-crackers",
-        storageBucket: "aj-crackers.appspot.com",
-        messagingSenderId: "87340856698",
-        appId: "1:87340856698:web:b76f5568120babbb3a12c3",
-        measurementId: "G-YHLCT13DFY"
-    };
+    var firebaseConfig = (window.APP_CONFIG && window.APP_CONFIG.FIREBASE_CONFIG) ? window.APP_CONFIG.FIREBASE_CONFIG : {};
     firebase.initializeApp(firebaseConfig);
     getDataFromSheetsApi = firebase.app().functions('us-central1').httpsCallable('getDataFromSheetsApi')
     addDataToSheetsApi = firebase.app().functions('us-central1').httpsCallable('addDataToSheetsApi')
